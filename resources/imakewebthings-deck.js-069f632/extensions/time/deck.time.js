@@ -181,9 +181,9 @@
         stayTime: 1000,
         fadeInSpeed: 200,
         fadeOutSpeed: 200,
-        targetTime: '28 minutes 30 seconds',
+        targetTime: '20 minutes',
         targetTimeExceededClass: 'deck-running-time-exceeded',
-        firstShowTime: '15 minutes'
+        firstShowTime: '10 minutes'
     });
     
     /**

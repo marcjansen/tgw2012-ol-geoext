@@ -92,6 +92,14 @@ ul, ul ul {
 .deck-running-time-exceeded {
     color: #f00;
 }
+
+div.aside-right {
+    width: 20em;
+    height: 12em;
+    position: absolute;
+    right: 2em;
+    top: 4em;
+}
     </style>
 </head>
 
@@ -106,9 +114,11 @@ ul, ul ul {
     </h2>
 </div>
 
+<!--
 <div class="slide">
     <h1>Content</h1>
 </div>
+-->
 
 <div class="slide" id="content">
     <h2>Content</h2>
@@ -156,6 +166,7 @@ ul, ul ul {
         <li>so is GeoExt</li>
         <li><em>highlights</em> of both libraries</li>
         <li>... all in relation to vector data</li>
+        <li>a hell of a ride</li>
     </ul>
 </div>
 
@@ -202,6 +213,58 @@ ul, ul ul {
         <li>OpenLayers.Format</li>
         <li>GML, KML, GeoJson, &hellip;</li>
     </ul>
+    <div class="aside-right" id="ol-formats"></div>
+</div>
+
+<div class="slide" id="openlayers-vector-data-displaying">
+    <h2>displaying vector data</h2>
+    <ul>
+        <li>SVG</li>
+        <li>Canvas</li>
+        <li>VML</li>
+        <li><strike>SVG2</strike></li>
+        <li>normalized interaction</li>
+    </ul>
+    <div class="aside-right" id="ol-renderer-canvas"></div>
+</div>
+
+<div class="slide" id="openlayers-vector-data-styling">
+    <h2>styling vector data</h2>
+    <ul>
+        <li>cross-renderer</li>
+        <li>feature-attribute based</li>
+        <li>context based</li>
+        <li>render-intend based</li>
+    </ul>
+    <div class="aside-right" id="ol-vector-style"></div>
+</div>
+
+<div class="slide" id="openlayers-vector-data-modifying">
+    <h2>modifying vector data</h2>
+    <ul>
+        <li>editing controls (CUD)</li>
+        <li>snapping / splitting</li>
+        <li>clustering</li>
+        <li>simplification</li>
+    </ul>
+    <div class="aside-right" id="ol-vector-simplified"></div>
+</div>
+
+<div class="slide" id="openlayers-vector-data-persisting">
+    <h2>persisting vector data</h2>
+    <ul>
+        <li>persisting via WFS-T</li>
+        <li>other outputformats</li>
+    </ul>
+</div>
+
+<div class="slide" id="openlayers-vector-performance">
+    <h2>performance</h2>
+    <ul>
+        <li>renderer dependant</li>
+        <li>basically sufficient / satisfying</li>
+        <li>room for improvement</li>
+    </ul>
 </div>
 
 <div class="slide">
@@ -226,29 +289,44 @@ ul, ul ul {
 <div class="slide" id="geoext-vector-data-part-1">
     <h2>GeoExt and vector data</h2>
     <ul>
-        <li>data components
-            <ul>
-                <li>for grids</li>
-                <li>for charts</li>
-                <li>for trees</li>
-            </ul>
-        </li>
-        
+        <li>data components</li>
         <li>form components</li>
+        <li>UI enhancements</li>
     </ul>
 </div>
 
-<div class="slide" id="geoext-vector-data-part-1">
-    <h2>GeoExt and vector data</h2>
+<div class="slide" id="geoext-data-components">
+    <h2>GeoExt data components</h2>
     <ul>
-        <li>UI enhancements
+        <li>proxy for OpenLayers.Protocol objects</li>
+        <li>readers for e.g. features and attributes</li>
+        <li>models for e.g. WFS GetCapabilities (discovery)</li>
+        <li>stores that combine the aforementioned</li>
+    </ul>
+</div>
+
+<div class="slide" id="geoext-form-components">
+    <h2>GeoExt form components</h2>
+    <ul>
+        <li>can combine a proxy (with OpenLayer.Protocol)</li>
+        <li>with an OpenLayers.Filter</li>
+        <li>generated from a standard form</li>
+        <li>e.g. for querying a WFS</li>
+    </ul>
+</div>
+
+<div class="slide" id="geoext-form-components">
+    <h2>GeoExt UI enhancements</h2>
+    <ul>
+        <li>VectorRenderer
             <ul>
-                <li>vector legend</li>
-                <li>column symbolizers</li>
-                <li>print composition</li>
-                <li>selection models</li>
+                <li>OpenLayers.Style to Ext.Component</li>
+                <li>used e.g. in legends</li>
+                <li>or in feature grids</li>
             </ul>
         </li>
+        <li>interactive print selection</li>
+        <li>highlighting features (grid &hArr; map)</li>
     </ul>
 </div>
 
@@ -278,12 +356,27 @@ ul, ul ul {
 </div>
 
 
-<div class="slide">
+<div class="slide" id="thanks-questions">
     <h2>Thank you</h2>
+    <h1>Questions?</h1>
 </div>
 
-<div class="slide">
+<div class="slide" id="imprint">
     <h2>Imprint</h2>
+    <h3>Author</h3>
+    <address>
+        Marc Jansen<br />
+        jansen@terrestris.de
+    </address>
+    <p>
+        (twitter) @selectoid<br />
+        (github) @marcjansen
+    </p>
+    <h3>License</h3>
+    <p>
+        These slides are 
+        <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>.
+    </p>
 </div>
 
 <!-- End slides. -->
@@ -334,6 +427,174 @@ ul, ul ul {
 <script type="text/javascript" >
     jQuery(function() {
         jQuery.deck('.slide');
+        OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url="
+        var geographic = new OpenLayers.Projection("EPSG:4326");
+        var mercator = new OpenLayers.Projection("EPSG:900913");
+        var swissCenterGeogr = new OpenLayers.LonLat(8.2153826,46.79902293);
+        swissCenterMerc = swissCenterGeogr.clone().transform(geographic, mercator);
+    
+        var map1 = new OpenLayers.Map('ol-formats', {
+            allOverlays: true,
+            projection: mercator,
+            layers: [
+                new OpenLayers.Layer.OSM(),
+                new OpenLayers.Layer.Vector("wfs", {
+                    strategies: [new OpenLayers.Strategy.BBOX()],
+                    protocol: new OpenLayers.Protocol.WFS({
+                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                        featureType: "world-countries-shape",
+                        featureNS: "http://terrestris.de"
+                    }),
+                    filter: new OpenLayers.Filter.Comparison({
+                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                        property: "iso_a2",
+                        value: "CH"
+                    }),
+                    projection: geographic,
+                    style: new OpenLayers.Util.applyDefaults({
+                        fillOpacity: 0.3,
+                        fillColor: '#ccc',
+                        strokeColor: '#d00',
+                        strokeWidth: 3,
+                        strokeDashstyle: 'solid',
+                        label: "Switzerland"
+                    }, OpenLayers.Feature.Vector.style['default']),
+                    renderers: ['SVG', 'Canvas', 'VML'] // optional this is the default also
+                })
+            ],
+            controls: [new OpenLayers.Control.Navigation()],
+            center: swissCenterMerc,
+            zoom: 7
+        });
+        
+        var map2 = new OpenLayers.Map('ol-renderer-canvas', {
+            allOverlays: true,
+            projection: mercator,
+            layers: [
+                new OpenLayers.Layer.OSM(),
+                new OpenLayers.Layer.Vector("wfs", {
+                    strategies: [new OpenLayers.Strategy.BBOX()],
+                    protocol: new OpenLayers.Protocol.WFS({
+                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                        featureType: "world-countries-shape",
+                        featureNS: "http://terrestris.de"
+                    }),
+                    filter: new OpenLayers.Filter.Comparison({
+                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                        property: "iso_a2",
+                        value: "CH"
+                    }),
+                    projection: geographic,
+                    style: new OpenLayers.Util.applyDefaults({
+                        fillOpacity: 0.3,
+                        fillColor: '#ccc',
+                        strokeColor: '#d00',
+                        strokeWidth: 3,
+                        strokeDashstyle: 'solid',
+                        label: "Switzerland"
+                    }, OpenLayers.Feature.Vector.style['default']),
+                    renderers: ['Canvas', 'SVG', 'VML']
+                })
+            ],
+            controls: [new OpenLayers.Control.Navigation()],
+            center: swissCenterMerc,
+            zoom: 7
+        });
+        
+        var map3 = new OpenLayers.Map('ol-vector-style', {
+            allOverlays: true,
+            projection: mercator,
+            layers: [
+                new OpenLayers.Layer.OSM(),
+                new OpenLayers.Layer.Vector("wfs", {
+                    strategies: [new OpenLayers.Strategy.BBOX()],
+                    protocol: new OpenLayers.Protocol.WFS({
+                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                        featureType: "world-countries-shape",
+                        featureNS: "http://terrestris.de"
+                    }),
+                    filter: new OpenLayers.Filter.Comparison({
+                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                        property: "iso_a2",
+                        value: "CH"
+                    }),
+                    projection: geographic,
+                    style: new OpenLayers.Util.applyDefaults({
+                        fillOpacity: 0.3,
+                        fillColor: '#e0e',
+                        strokeColor: '#0e0',
+                        strokeWidth: 5,
+                        strokeDashstyle: 'solid',
+                        labelOutlineColor: 'orange',
+                        labelOutlineWidth: 4,
+                        fontColor: '#e00',
+                        fontFamily: 'Squealer Embossed',
+                        label: "Switzerland"
+                    }, OpenLayers.Feature.Vector.style['default'])
+                })
+            ],
+            controls: [new OpenLayers.Control.Navigation()],
+            center: swissCenterMerc,
+            zoom: 7
+        });
+        
+        // ol-vector-simplified,
+        var map4 = new OpenLayers.Map('ol-vector-simplified', {
+            allOverlays: true,
+            projection: mercator,
+            layers: [
+                new OpenLayers.Layer.OSM(),
+                new OpenLayers.Layer.Vector("wfs", {
+                    strategies: [new OpenLayers.Strategy.BBOX()],
+                    protocol: new OpenLayers.Protocol.WFS({
+                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                        featureType: "world-countries-shape",
+                        featureNS: "http://terrestris.de"
+                    }),
+                    filter: new OpenLayers.Filter.Comparison({
+                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                        property: "iso_a2",
+                        value: "CH"
+                    }),
+                    projection: geographic,
+                    style: new OpenLayers.Util.applyDefaults({
+                        fillOpacity: 0.3,
+                        fillColor: '#ccc',
+                        strokeColor: '#d00',
+                        strokeWidth: 5,
+                        strokeDashstyle: 'solid'
+                    }, OpenLayers.Feature.Vector.style['default'])
+                })
+            ],
+            controls: [new OpenLayers.Control.Navigation()],
+            center: swissCenterMerc,
+            zoom: 7
+        });
+        var simplify = function(evt){
+            if (map4.layers[1].features.length >=2 ) {
+                console.log('unregister');
+                map4.layers[1].events.unregister('featureadded', map4, simplify);
+            }
+            var points = evt.feature.geometry.getVertices();
+            var ls = new OpenLayers.Geometry.LineString(points).simplify(10000);
+            map4.layers[1].addFeatures([new OpenLayers.Feature.Vector(
+                new OpenLayers.Geometry.MultiPolygon(
+                    new OpenLayers.Geometry.Polygon(
+                        new  OpenLayers.Geometry.LinearRing(ls.getVertices())
+                    )
+                )
+            )], null, new OpenLayers.Style(new OpenLayers.Util.applyDefaults({
+                fill: false,
+                strokeColor: '#f00',
+                strokeWidth: 5,
+                strokeDashstyle: 'solid'
+            }, OpenLayers.Feature.Vector.style['default'])));
+            map4.layers[1].removeFeatures([map4.layers[1].features[0]])
+        };
+        map4.layers[1].events.register('featureadded', map4, simplify);
+        map4.addControl(new OpenLayers.Control.ModifyFeature(map4.layers[1], {
+            autoActivate: true
+        }));
     });
 </script>
 </body>
