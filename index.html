@@ -152,11 +152,11 @@
     <h2>fetching &amp; reading vector data</h2>
     <ul>
         <li>OpenLayers.Protocol</li>
-        <li>WFS, HTTP, &hellip;</li>
+        <li>&nbsp;&rarr;&nbsp;WFS, HTTP, &hellip;</li>
     </ul>
     <ul>
         <li>OpenLayers.Format</li>
-        <li>GML, KML, GeoJson, &hellip;</li>
+        <li>&nbsp;&rarr;&nbsp;GML, KML, GeoJSON, &hellip;</li>
     </ul>
     <div class="aside-right" id="ol-formats"></div>
 </div>
@@ -200,13 +200,31 @@
         <li>persisting via WFS-T</li>
         <li>other outputformats</li>
     </ul>
+    
+    
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>KML</th>
+                <th>GeoJSON</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="kml-out"><textarea>KML</textarea></td>
+                <td id="geojson-out"><textarea>GeoJSON</textarea></td>
+            </tr>
+        </tbody>
+    </table>
+    
     <div class="aside-right" id="output-formats" style="width: 34em;">
-    <ul>
-        <li>Switzerland</li>
-        <li>&bull; verticies <span id="vertices-before"></span> &rarr; <span id="vertices-after"></span></li>
-        <li>&bull; length <span id="length-before"></span> &rarr; <span id="length-after"></span></li>
-    </ul>
+        <ul>
+            <li>Switzerland</li>
+            <li>&bull; vertices <span id="vertices-before"></span> &rarr; <span id="vertices-after"></span></li>
+            <li>&bull; length <span id="length-before"></span> &rarr; <span id="length-after"></span></li>
+        </ul>
     </div>
+    
 </div>
 
 <div class="slide" id="openlayers-vector-performance">
@@ -291,6 +309,7 @@
         <li>performance</li>
         <li>file size</li>
         <li>better API-docs</li>
+        <li>Dragons ahead: <a href="http://dev.camptocamp.com/files/tpayne/ol3/demos/side-by-side/advanced-optimizations.html">Demo</a></li>
     </ul>
 </div>
 
@@ -298,10 +317,11 @@
     <h2>GeoExt 2</h2>
     <ul>
         <li>not too far from final</li>
+        <li>some cleanup (code and docs)</li>
         <li>chart interactions</li>
     </ul>
     <ul>
-        <li>GeoExt next: OpenLayers 3 ?</li>
+        <li>GeoExt {next}: OpenLayers 3 ?</li>
     </ul>
 </div>
 
@@ -319,8 +339,8 @@
         jansen@terrestris.de
     </address>
     <p>
-        (twitter) @selectoid<br />
-        (github) @marcjansen
+        (twitter) <a href="http://twitter.com/selectoid">@selectoid</a><br />
+        (github) <a href="https://github.com/marcjansen">@marcjansen</a>
     </p>
     <h3>License</h3>
     <p>

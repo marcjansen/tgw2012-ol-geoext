@@ -207,6 +207,10 @@ jQuery(function() {
         map4.layers[1].removeFeatures([map4.layers[1].features[0]]);
     };
     
+    /**
+     * @param {Object} geom
+     * @param {Object} whichOne
+     */
     var updateInfo = function(geom, whichOne) {
 
         var verticesCnt = geom.getVertices().length;
@@ -215,10 +219,22 @@ jQuery(function() {
         $('#vertices-' + whichOne).text(' ' + verticesCnt);
         $('#length-' + whichOne).text(' ' + (length / 1000).toFixed(1) + ' km');
     };
+    
+    /**
+     * @param {Object} feature
+     */
+    var updateExports = function(feature) {
+        var kml = (new OpenLayers.Format.KML()).write(feature),
+            geojson = (new OpenLayers.Format.GeoJSON()).write(feature);
+        $('#kml-out textarea').text(kml);
+        $('#geojson-out textarea').text(geojson);
+    };
+    
     map4.layers[1].events.register('featureadded', map4, simplify);
     
     map4.layers[1].events.register('afterfeaturemodified', map4, function(evt){
         updateInfo(evt.feature.geometry, 'after');
+        updateExports(evt.feature);
     });
     map4.addControl(new OpenLayers.Control.ModifyFeature(map4.layers[1], {
         autoActivate: true

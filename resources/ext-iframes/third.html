@@ -74,13 +74,11 @@
                         projection: geographic,
                         styleMap: new OpenLayers.StyleMap({
                             'default': new OpenLayers.Util.applyDefaults({
-                                title: 'asdsd',
                                 fillOpacity: 0.3,
                                 fillColor: '#ccc',
                                 strokeColor: '#d00',
                                 strokeWidth: 3,
                                 strokeDashstyle: 'solid'
-                                //label: "Switzerland"
                             }, OpenLayers.Feature.Vector.style['default']),
                             'select': new OpenLayers.Util.applyDefaults({
                                 fillOpacity: 0.3,
@@ -88,7 +86,6 @@
                                 strokeColor: '#00e',
                                 strokeWidth: 3,
                                 strokeDashstyle: 'solid'
-                                //label: "Switzerland (selected)"
                             }, OpenLayers.Feature.Vector.style['select'])
                         }),
                         renderers: ['SVG', 'Canvas', 'VML'] // optional this is the default also

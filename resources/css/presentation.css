@@ -19,7 +19,9 @@ ul, ul ul {
     list-style-type:none;
 }
 
-.slide ul li {
+.slide ul li,
+.slide p,
+.slide address {
     font-size: 170%;
     font-weight: bold;
     font-family: "LMSansDemiCond10", sans-serif;
@@ -52,7 +54,7 @@ ul, ul ul {
 div.aside-right,
 iframe.aside-right {
     width: 20em;
-    height: 12em;
+    height: 15em;
     position: absolute;
     right: 2em;
     top: 4em;
@@ -64,3 +66,16 @@ iframe.aside-right {
 .olImageLoadError {
     background: transparent !important;
 }
+
+.deck-container th {
+    text-align: left;
+}
+
+.deck-container td textarea {
+    font-size: small;
+    height: 300px;
+    width: 400px;
+    overflow-y: scroll;
+    font-family: "Courier new", monospace;
+}
+
