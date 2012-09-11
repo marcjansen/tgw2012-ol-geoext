@@ -24,6 +24,9 @@
     <!-- Transition theme. More available in /themes/transition/ or create your own. -->
     <link rel="stylesheet" type="text/css" href="./resources/imakewebthings-deck.js-069f632/themes/transition/horizontal-slide.css">
     
+    <!-- own styles -->
+    <link rel="stylesheet" type="text/css" href="./resources/css/presentation.css">
+    
     <!-- Required Modernizr file -->
     <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/modernizr.custom.js"></script>
     
@@ -42,64 +45,6 @@
     </script>
     
     <style type="text/css"> 
-#title h1 {
-    top: 40%
-}
-#author {
-    position: absolute;
-    bottom: 2%;
-    right:  2%;
-    font-size: 50px;
-    color: #444;
-    font-family: "LMSansDemiCond10", sans-serif;
-}
-#author a {
-    text-decoration: none;
-    color: #444;
-    font-family: "Courier", monospace;
-}
-
-ul, ul ul {
-    list-style-type:none;
-}
-
-.slide ul li {
-    font-size: 170%;
-    font-weight: bold;
-    font-family: "LMSansDemiCond10", sans-serif;
-    letter-spacing: 0.05em;
-}
-
-.slide ul li ul li {
-    font-size: 100%;
-}
-
-.sideimage-right {
-    width: 350px;
-    position: absolute;
-    top: 1em;
-    right: 1em;
-}
-
-.deck-running-time {
-    position: absolute;
-    left: 0.3em;
-    bottom: 0.3em;
-    color: #555;
-    text-shadow: 1px 1px 1px #fff;
-    font-size: 15px;
-}
-.deck-running-time-exceeded {
-    color: #f00;
-}
-
-div.aside-right {
-    width: 20em;
-    height: 12em;
-    position: absolute;
-    right: 2em;
-    top: 4em;
-}
     </style>
 </head>
 
@@ -157,6 +102,9 @@ div.aside-right {
         <li>OpenSource / Free software</li>
         <li>development, training, consulting</li>
     </ul>
+    <img src="./resources/img/terrestris-logo-small.png" 
+        class="sideimage-right"
+        alt="terrestris">
 </div>
 
 <div class="slide" id="about-the-talk">
@@ -168,6 +116,9 @@ div.aside-right {
         <li>... all in relation to vector data</li>
         <li>a hell of a ride</li>
     </ul>
+    <img src="./resources/img/ol-gx-small.png" 
+        class="sideimage-right"
+        alt="OpenLayers &amp; GeoExt">
 </div>
 
 <div class="slide">
@@ -184,12 +135,6 @@ div.aside-right {
         <li>understands lots of formats</li>
         <li>provides a common API</li>
     </ul>
-</div>
-
-<div class="slide" id="openlayers-example">
-    <h2>Example</h2>
-    <img src="./resources/img/fix-me.png" 
-        alt="OpenLayers example">
 </div>
 
 <div class="slide" id="openlayers-vector-data">
@@ -222,7 +167,6 @@ div.aside-right {
         <li>SVG</li>
         <li>Canvas</li>
         <li>VML</li>
-        <li><strike>SVG2</strike></li>
         <li>normalized interaction</li>
     </ul>
     <div class="aside-right" id="ol-renderer-canvas"></div>
@@ -256,6 +200,13 @@ div.aside-right {
         <li>persisting via WFS-T</li>
         <li>other outputformats</li>
     </ul>
+    <div class="aside-right" id="output-formats" style="width: 34em;">
+    <ul>
+        <li>Switzerland</li>
+        <li>&bull; verticies <span id="vertices-before"></span> &rarr; <span id="vertices-after"></span></li>
+        <li>&bull; length <span id="length-before"></span> &rarr; <span id="length-after"></span></li>
+    </ul>
+    </div>
 </div>
 
 <div class="slide" id="openlayers-vector-performance">
@@ -280,12 +231,6 @@ div.aside-right {
     </ul>
 </div>
 
-<div class="slide" id="geoext-example">
-    <h2>Example</h2>
-    <img src="./resources/img/fix-me.png" 
-        alt="GeoExt example">
-</div>
-
 <div class="slide" id="geoext-vector-data-part-1">
     <h2>GeoExt and vector data</h2>
     <ul>
@@ -299,23 +244,27 @@ div.aside-right {
     <h2>GeoExt data components</h2>
     <ul>
         <li>proxy for OpenLayers.Protocol objects</li>
-        <li>readers for e.g. features and attributes</li>
-        <li>models for e.g. WFS GetCapabilities (discovery)</li>
+        <li>readers for e.g. features / attributes</li>
+        <li>models for e.g. (discovery)</li>
         <li>stores that combine the aforementioned</li>
     </ul>
+    <!-- <div class="aside-right" id="geoext-data"></div> -->
+    <iframe src="./resources/ext-iframes/first.html" class="aside-right"></iframe>
 </div>
 
 <div class="slide" id="geoext-form-components">
     <h2>GeoExt form components</h2>
     <ul>
-        <li>can combine a proxy (with OpenLayer.Protocol)</li>
+        <li>can combine a proxy <br />
+        (with OpenLayer.Protocol)</li>
         <li>with an OpenLayers.Filter</li>
         <li>generated from a standard form</li>
         <li>e.g. for querying a WFS</li>
     </ul>
+    <iframe src="./resources/ext-iframes/second.html" class="aside-right"></iframe>
 </div>
 
-<div class="slide" id="geoext-form-components">
+<div class="slide" id="geoext-ui-enhancements">
     <h2>GeoExt UI enhancements</h2>
     <ul>
         <li>VectorRenderer
@@ -328,6 +277,7 @@ div.aside-right {
         <li>interactive print selection</li>
         <li>highlighting features (grid &hArr; map)</li>
     </ul>
+    <iframe src="./resources/ext-iframes/third.html" class="aside-right"></iframe>
 </div>
 
 <div class="slide">
@@ -416,7 +366,7 @@ div.aside-right {
 
 <!-- Extension JS files. Add or remove as needed. -->
 <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/hash/deck.hash.js"></script>
-<script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/time/deck.time.uglified.js"></script>
+<script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/time/deck.time.js"></script>
 <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/menu/deck.menu.js"></script>
 <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/goto/deck.goto.js"></script>
 <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/status/deck.status.js"></script>
@@ -424,178 +374,6 @@ div.aside-right {
 <script type="text/javascript" src="./resources/imakewebthings-deck.js-069f632/extensions/scale/deck.scale.js"></script>
 
 <!-- Initialize the deck. You can put this in an external file if desired. -->
-<script type="text/javascript" >
-    jQuery(function() {
-        jQuery.deck('.slide');
-        OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url="
-        var geographic = new OpenLayers.Projection("EPSG:4326");
-        var mercator = new OpenLayers.Projection("EPSG:900913");
-        var swissCenterGeogr = new OpenLayers.LonLat(8.2153826,46.79902293);
-        swissCenterMerc = swissCenterGeogr.clone().transform(geographic, mercator);
-    
-        var map1 = new OpenLayers.Map('ol-formats', {
-            allOverlays: true,
-            projection: mercator,
-            layers: [
-                new OpenLayers.Layer.OSM(),
-                new OpenLayers.Layer.Vector("wfs", {
-                    strategies: [new OpenLayers.Strategy.BBOX()],
-                    protocol: new OpenLayers.Protocol.WFS({
-                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
-                        featureType: "world-countries-shape",
-                        featureNS: "http://terrestris.de"
-                    }),
-                    filter: new OpenLayers.Filter.Comparison({
-                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-                        property: "iso_a2",
-                        value: "CH"
-                    }),
-                    projection: geographic,
-                    style: new OpenLayers.Util.applyDefaults({
-                        fillOpacity: 0.3,
-                        fillColor: '#ccc',
-                        strokeColor: '#d00',
-                        strokeWidth: 3,
-                        strokeDashstyle: 'solid',
-                        label: "Switzerland"
-                    }, OpenLayers.Feature.Vector.style['default']),
-                    renderers: ['SVG', 'Canvas', 'VML'] // optional this is the default also
-                })
-            ],
-            controls: [new OpenLayers.Control.Navigation()],
-            center: swissCenterMerc,
-            zoom: 7
-        });
-        
-        var map2 = new OpenLayers.Map('ol-renderer-canvas', {
-            allOverlays: true,
-            projection: mercator,
-            layers: [
-                new OpenLayers.Layer.OSM(),
-                new OpenLayers.Layer.Vector("wfs", {
-                    strategies: [new OpenLayers.Strategy.BBOX()],
-                    protocol: new OpenLayers.Protocol.WFS({
-                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
-                        featureType: "world-countries-shape",
-                        featureNS: "http://terrestris.de"
-                    }),
-                    filter: new OpenLayers.Filter.Comparison({
-                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-                        property: "iso_a2",
-                        value: "CH"
-                    }),
-                    projection: geographic,
-                    style: new OpenLayers.Util.applyDefaults({
-                        fillOpacity: 0.3,
-                        fillColor: '#ccc',
-                        strokeColor: '#d00',
-                        strokeWidth: 3,
-                        strokeDashstyle: 'solid',
-                        label: "Switzerland"
-                    }, OpenLayers.Feature.Vector.style['default']),
-                    renderers: ['Canvas', 'SVG', 'VML']
-                })
-            ],
-            controls: [new OpenLayers.Control.Navigation()],
-            center: swissCenterMerc,
-            zoom: 7
-        });
-        
-        var map3 = new OpenLayers.Map('ol-vector-style', {
-            allOverlays: true,
-            projection: mercator,
-            layers: [
-                new OpenLayers.Layer.OSM(),
-                new OpenLayers.Layer.Vector("wfs", {
-                    strategies: [new OpenLayers.Strategy.BBOX()],
-                    protocol: new OpenLayers.Protocol.WFS({
-                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
-                        featureType: "world-countries-shape",
-                        featureNS: "http://terrestris.de"
-                    }),
-                    filter: new OpenLayers.Filter.Comparison({
-                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-                        property: "iso_a2",
-                        value: "CH"
-                    }),
-                    projection: geographic,
-                    style: new OpenLayers.Util.applyDefaults({
-                        fillOpacity: 0.3,
-                        fillColor: '#e0e',
-                        strokeColor: '#0e0',
-                        strokeWidth: 5,
-                        strokeDashstyle: 'solid',
-                        labelOutlineColor: 'orange',
-                        labelOutlineWidth: 4,
-                        fontColor: '#e00',
-                        fontFamily: 'Squealer Embossed',
-                        label: "Switzerland"
-                    }, OpenLayers.Feature.Vector.style['default'])
-                })
-            ],
-            controls: [new OpenLayers.Control.Navigation()],
-            center: swissCenterMerc,
-            zoom: 7
-        });
-        
-        // ol-vector-simplified,
-        var map4 = new OpenLayers.Map('ol-vector-simplified', {
-            allOverlays: true,
-            projection: mercator,
-            layers: [
-                new OpenLayers.Layer.OSM(),
-                new OpenLayers.Layer.Vector("wfs", {
-                    strategies: [new OpenLayers.Strategy.BBOX()],
-                    protocol: new OpenLayers.Protocol.WFS({
-                        url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
-                        featureType: "world-countries-shape",
-                        featureNS: "http://terrestris.de"
-                    }),
-                    filter: new OpenLayers.Filter.Comparison({
-                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-                        property: "iso_a2",
-                        value: "CH"
-                    }),
-                    projection: geographic,
-                    style: new OpenLayers.Util.applyDefaults({
-                        fillOpacity: 0.3,
-                        fillColor: '#ccc',
-                        strokeColor: '#d00',
-                        strokeWidth: 5,
-                        strokeDashstyle: 'solid'
-                    }, OpenLayers.Feature.Vector.style['default'])
-                })
-            ],
-            controls: [new OpenLayers.Control.Navigation()],
-            center: swissCenterMerc,
-            zoom: 7
-        });
-        var simplify = function(evt){
-            if (map4.layers[1].features.length >=2 ) {
-                console.log('unregister');
-                map4.layers[1].events.unregister('featureadded', map4, simplify);
-            }
-            var points = evt.feature.geometry.getVertices();
-            var ls = new OpenLayers.Geometry.LineString(points).simplify(10000);
-            map4.layers[1].addFeatures([new OpenLayers.Feature.Vector(
-                new OpenLayers.Geometry.MultiPolygon(
-                    new OpenLayers.Geometry.Polygon(
-                        new  OpenLayers.Geometry.LinearRing(ls.getVertices())
-                    )
-                )
-            )], null, new OpenLayers.Style(new OpenLayers.Util.applyDefaults({
-                fill: false,
-                strokeColor: '#f00',
-                strokeWidth: 5,
-                strokeDashstyle: 'solid'
-            }, OpenLayers.Feature.Vector.style['default'])));
-            map4.layers[1].removeFeatures([map4.layers[1].features[0]])
-        };
-        map4.layers[1].events.register('featureadded', map4, simplify);
-        map4.addControl(new OpenLayers.Control.ModifyFeature(map4.layers[1], {
-            autoActivate: true
-        }));
-    });
-</script>
+<script type="text/javascript" src="./resources/js/behaviour.js"></script>
 </body>
 </html>

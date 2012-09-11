@@ -101,16 +101,19 @@
 
             res = hourRegExp.exec(timeStr);
             if (res && res[1]) {
+//                console.log('H:', res[1]);
                 normalizedTimeObj.hours = parseFloat(res[1]);
             }
 
             res = minuteRegExp.exec(timeStr);
             if (res && res[1]) {
+//                console.log('M:', res[1]);
                 normalizedTimeObj.minutes = parseFloat(res[1]);
             }
 
             res = secondsRegExp.exec(timeStr);
             if (res && res[1]) {
+//                console.log('S:', res[1]);
                 normalizedTimeObj.seconds = parseFloat(res[1]);
             }
 
@@ -183,7 +186,7 @@
         fadeOutSpeed: 200,
         targetTime: '20 minutes',
         targetTimeExceededClass: 'deck-running-time-exceeded',
-        firstShowTime: '10 minutes'
+        firstShowTime: '15 minutes'
     });
     
     /**

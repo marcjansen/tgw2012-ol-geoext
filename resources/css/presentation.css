@@ -1,0 +1,66 @@
+#title h1 {
+    top: 40%
+}
+#author {
+    position: absolute;
+    bottom: 2%;
+    right:  2%;
+    font-size: 50px;
+    color: #444;
+    font-family: "LMSansDemiCond10", sans-serif;
+}
+#author a {
+    text-decoration: none;
+    color: #444;
+    font-family: "Courier", monospace;
+}
+
+ul, ul ul {
+    list-style-type:none;
+}
+
+.slide ul li {
+    font-size: 170%;
+    font-weight: bold;
+    font-family: "LMSansDemiCond10", sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.slide ul li ul li {
+    font-size: 100%;
+}
+
+.sideimage-right {
+    width: 350px;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+.deck-running-time {
+    position: absolute;
+    left: 0.3em;
+    bottom: 0.3em;
+    color: #555;
+    text-shadow: 1px 1px 1px #fff;
+    font-size: 15px;
+}
+.deck-running-time-exceeded {
+    color: #f00;
+}
+
+div.aside-right,
+iframe.aside-right {
+    width: 20em;
+    height: 12em;
+    position: absolute;
+    right: 2em;
+    top: 4em;
+}
+
+#output-formats {
+    font-size: smaller;
+}
+.olImageLoadError {
+    background: transparent !important;
+}
