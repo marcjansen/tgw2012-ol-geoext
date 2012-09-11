@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>WebGIS with vector data using OpenLayers &amp; GeoExt</title>
+    
+    <link rel="stylesheet" type="text/css" href="../extjs-4.1.1/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs-4.1.1/ext-dev.js"></script>
+    <script type="text/javascript" src="../openlayers-openlayers-ec26dd6/lib/OpenLayers.js"></script>
+    <style type="text/css">
+.olImageLoadError {
+    background: transparent !important;
+    display: hidden !important;
+    opacity: 0 !important;
+}
+    </style>
+    <script type="text/javascript">
+    Ext.Loader.setConfig({
+        enabled: true,
+        disableCaching: false,
+        paths: {
+            GeoExt: "../geoext-geoext2-aef9c2a/src/GeoExt",
+            Ext: "../extjs-4.1.1/src"
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    
+    Ext.require([
+        'Ext.container.Viewport',
+        'GeoExt.grid.column.Symbolizer',
+        'GeoExt.selection.FeatureModel'
+    ]);
+    
+    Ext.application({
+        
+        launch: function(){
+            
+            OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    
+            var geographic = new OpenLayers.Projection("EPSG:4326"),
+                mercator = new OpenLayers.Projection("EPSG:900913"),
+                swissCenterGeogr = new OpenLayers.LonLat(8.2153826,46.79902293),
+                swissCenterMerc = swissCenterGeogr.clone().transform(geographic, mercator);
+            
+            var map = new OpenLayers.Map({
+                allOverlays: true,
+                projection: mercator,
+                layers: [
+                    new OpenLayers.Layer.OSM(),
+                    new OpenLayers.Layer.Vector("wfs", {
+                        strategies: [new OpenLayers.Strategy.BBOX()],
+                        protocol: new OpenLayers.Protocol.WFS({
+                            //url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                            url: "../data/switzerland.gml.xml",
+                            featureType: "world-countries-shape",
+                            featureNS: "http://terrestris.de"
+                        }),
+                        filter: new OpenLayers.Filter.Comparison({
+                            type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                            property: "iso_a2",
+                            value: "CH"
+                        }),
+                        projection: geographic,
+//                        style: new OpenLayers.Util.applyDefaults({
+//                            fillOpacity: 0.3,
+//                            fillColor: '#ccc',
+//                            strokeColor: '#d00',
+//                            strokeWidth: 3,
+//                            strokeDashstyle: 'solid',
+//                            label: "Switzerland"
+//                        }, OpenLayers.Feature.Vector.style['default']),
+
+                        styleMap: new OpenLayers.StyleMap({
+                            'default': new OpenLayers.Util.applyDefaults({
+                                fillOpacity: 0.3,
+                                fillColor: '#ccc',
+                                strokeColor: '#d00',
+                                strokeWidth: 3,
+                                strokeDashstyle: 'solid',
+                                label: "Switzerland"
+                            }, OpenLayers.Feature.Vector.style['default']),
+                            'select': new OpenLayers.Util.applyDefaults({
+                                fillOpacity: 0.3,
+                                fillColor: '#00e',
+                                strokeColor: '#00e',
+                                strokeWidth: 3,
+                                strokeDashstyle: 'solid',
+                                label: "Switzerland (selected)"
+                            }, OpenLayers.Feature.Vector.style['select'])
+                        }),
+                        renderers: ['SVG', 'Canvas', 'VML'] // optional this is the default also
+                    })
+                ],
+                controls: [new OpenLayers.Control.Navigation()],
+                center: swissCenterMerc,
+                zoom: 7
+            });
+            var mapPanel = Ext.create('GeoExt.panel.Map', {
+                map: map,
+                title: 'A GeoExt.panel.Map-instance',
+                region: 'center'
+            });
+            
+            // create feature store, binding it to the vector layer
+            var store = Ext.create('GeoExt.data.FeatureStore', {
+                layer: map.layers[1],
+                fields: [
+                    {name: 'iso_a2', type: 'string'},
+                    {name: 'iso_a3', type: 'string'},
+                    {name: 'german_name', type: 'string'}
+                ],
+                autoLoad: true
+            });
+    
+            // create grid panel configured with feature store
+            var gridPanel = Ext.create('Ext.grid.GridPanel', {
+                title: "Feature Grid",
+                region: "north",
+                store: store,
+                height: 80,
+                columns: [{
+                    header: "German name",
+                    flex: 2,
+                    dataIndex: "german_name"
+                }, {
+                    header: "ISO code",
+                    flex: 1,
+                    dataIndex: "iso_a2"
+                }, {
+                    header: "ISO code 3",
+                    flex: 1,
+                    dataIndex: "iso_a3"
+                }],
+                selType: 'featuremodel'
+            });
+    
+            
+            Ext.create('Ext.container.Viewport', {
+                layout: 'border',
+                items: [
+                    gridPanel,
+                    mapPanel
+                ]
+            });
+        }
+    });
+    
+    
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>WebGIS with vector data using OpenLayers &amp; GeoExt</title>
+    
+    <link rel="stylesheet" type="text/css" href="../extjs-4.1.1/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs-4.1.1/ext-dev.js"></script>
+    <script type="text/javascript" src="../openlayers-openlayers-ec26dd6/lib/OpenLayers.js"></script>
+    <style type="text/css">
+.olImageLoadError {
+    background: transparent !important;
+    display: hidden !important;
+    opacity: 0 !important;
+}
+    </style>
+    <script type="text/javascript">
+    Ext.Loader.setConfig({
+        enabled: true,
+        disableCaching: false,
+        paths: {
+            GeoExt: "../geoext-geoext2-aef9c2a/src/GeoExt",
+            Ext: "../extjs-4.1.1/src"
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    
+    Ext.require([
+        'Ext.container.Viewport',
+        'GeoExt.grid.column.Symbolizer',
+        'GeoExt.selection.FeatureModel',
+        'GeoExt.data.FeatureStore',
+        'Ext.form.Panel',
+        'GeoExt.form.action.Search',
+        'Ext.grid.Panel',
+        'Ext.layout.container.Border'
+    ]);
+    
+    Ext.application({
+        
+        launch: function(){
+            
+            OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    
+            
+            // create feature store, binding it to the vector layer
+            var store = Ext.create('GeoExt.data.FeatureStore', {
+                // layer: map.layers[1],
+                fields: [
+                    {name: 'iso_a2', type: 'string'},
+                    {name: 'iso_a3', type: 'string'},
+                    {name: 'german_name', type: 'string'}
+                ],
+                autoLoad: true
+            });
+            
+            var formPanel = Ext.create('Ext.form.Panel', {
+                title: 'WFS Search',
+                bodyPadding: 3,
+                items: [{
+                    xtype: "textfield",
+                    name: "german_name__like",
+                    value: "Schwe*",
+                    fieldLabel: 'German name'
+                }],
+                buttons: [
+                    {
+                        text: 'Search',
+                        handler: function(){
+                            formPanel.getForm().doAction(searchAction);
+                        }
+                    }
+                ],
+                region: 'north'
+            });
+            
+            var searchAction = Ext.create('GeoExt.form.action.Search', {
+                form: formPanel.getForm(),
+                protocol: new OpenLayers.Protocol.WFS({
+                    url:  "http://ows.terrestris.de/geoserver/terrestris/wfs",
+                    //url: "../data/switzerland.gml.xml",
+                    featureType: "world-countries-shape",
+                    featureNS: "http://terrestris.de"
+                }),
+                abortPrevious: true,
+                callback: function(response) {
+                    // response.features includes the features read
+                    // from the server through the protocol
+                    gridPanel.getStore().loadRawData(response.features);
+                }
+            });
+    
+            // create grid panel configured with feature store
+            var gridPanel = Ext.create('Ext.grid.GridPanel', {
+                title: "Feature Grid",
+                region: "center",
+                store: store,
+                height: 80,
+                columns: [{
+                    header: "German name",
+                    flex: 2,
+                    dataIndex: "german_name"
+                }, {
+                    header: "ISO code",
+                    flex: 1,
+                    dataIndex: "iso_a2"
+                }, {
+                    header: "ISO code 3",
+                    flex: 1,
+                    dataIndex: "iso_a3"
+                }],
+                selType: 'featuremodel'
+            });
+    
+            
+            Ext.create('Ext.container.Viewport', {
+                layout: 'border',
+                items: [
+                    formPanel,
+                    gridPanel
+                ]
+            });
+        }
+    });
+    
+    
+    </script>
+</head>
+<body>
+</body>
+</html>
