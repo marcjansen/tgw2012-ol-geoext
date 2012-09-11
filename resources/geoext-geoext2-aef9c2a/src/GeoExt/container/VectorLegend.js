@@ -258,14 +258,19 @@ Ext.define('GeoExt.container.VectorLegend', {
             featuresadded: this.onFeaturesAdded,
             scope: this
         });
-        var feature = this.layer.features[0].clone();
-        feature.attributes = {};
-        this.feature = feature;
-        this.symbolType = this.symbolTypeFromFeature(this.feature);
-        if (!this.rules) {
-            this.setRules();
-        }
-        this.update();
+        var me = this;
+        window.setTimeout(function(){
+            var feature = me.layer.features[0].clone();
+            feature.attributes = {};
+            me.feature = feature;
+            me.symbolType = me.symbolTypeFromFeature(me.feature);
+            if (!me.rules) {
+                me.setRules();
+            }
+            me.update();
+        }, 1000);
+        
+        
     },
     
     /** 
